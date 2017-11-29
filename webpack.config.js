@@ -1,5 +1,3 @@
-// Why used 'libraryExport'? reference: https://github.com/webpack/webpack/issues/3929
-
 const path = require('path')
 
 const config = {

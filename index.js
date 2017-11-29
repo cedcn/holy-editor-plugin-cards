@@ -1,5 +1,23 @@
 import style from './style.scss'
-import { getRange, setSelection } from 'holy-editor/src/utils/selection'
+
+const getRange = () => {
+  const selection = window.getSelection()
+
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0)
+    return range
+  } else {
+    return null
+  }
+}
+
+export const setSelection = range => {
+  const selection = window.getSelection()
+  selection.removeAllRanges()
+  selection.addRange(range)
+
+  return selection
+}
 
 const defaults = {
   tooltip: '卡片'

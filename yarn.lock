@@ -1661,7 +1661,7 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-dift@0.1.12, dift@^0.1.2:
+dift@0.1.12:
   version "0.1.12"
   resolved "http://registry.npm.taobao.org/dift/download/dift-0.1.12.tgz#48f366497ea3361ca30451424b6daea285aa10e1"
   dependencies:
@@ -2754,7 +2754,7 @@ indent-string@^2.1.0:
   dependencies:
     repeating "^2.0.0"
 
-index-of@0.2.0, index-of@^0.2.0:
+index-of@0.2.0:
   version "0.2.0"
   resolved "http://registry.npm.taobao.org/index-of/download/index-of-0.2.0.tgz#38c1e2367ea55dffad3b6eb592ec1cc3090d7d65"
 
@@ -3001,11 +3001,7 @@ is-stream@^1.1.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/is-stream/download/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
-is-svg-attribute@^1.0.2:
-  version "1.2.0"
-  resolved "http://registry.npm.taobao.org/is-svg-attribute/download/is-svg-attribute-1.2.0.tgz#9b57ec8427748ee1d63a265161892f4d39f03302"
-
-is-svg-element@1.0.1, is-svg-element@^1.0.1:
+is-svg-element@1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/is-svg-element/download/is-svg-element-1.0.1.tgz#a759f1033156bb1e18c60d0f179a013d25ca9296"
 
@@ -4854,7 +4850,7 @@ set-immediate-shim@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/set-immediate-shim/download/set-immediate-shim-1.0.1.tgz#4b2b1b27eb808a9f8dcc481a58e5e56f599f3f61"
 
-setify@1.0.3, setify@^1.0.3:
+setify@1.0.3:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/setify/download/setify-1.0.3.tgz#94c4422ec8aee33305af78ea7ecb814b90d2b9bd"
   dependencies:
@@ -5356,7 +5352,7 @@ uid@0.0.2:
   version "0.0.2"
   resolved "http://registry.npm.taobao.org/uid/download/uid-0.0.2.tgz#5e4a5d4b78138b4f70f89fd3c76fc59aa9d2f103"
 
-union-type@0.1.6, union-type@^0.1.6:
+union-type@0.1.6:
   version "0.1.6"
   resolved "http://registry.npm.taobao.org/union-type/download/union-type-0.1.6.tgz#4ccf9d39a70534cb95bbd8a03ba250e88d47e8bc"
   dependencies:
