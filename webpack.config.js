@@ -7,7 +7,7 @@ const config = {
     'holy-editor-plugin-cards': './index.js'
   },
   output: {
-    path: path.resolve(__dirname, '/'),
+    path: path.resolve(__dirname, './'),
     filename: '[name].js',
     publicPath: '/static/',
     library: 'holyEditorPluginCards',
