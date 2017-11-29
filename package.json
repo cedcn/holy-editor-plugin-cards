@@ -1,6 +1,6 @@
 {
   "name": "holy-editor-plugin-cards",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Holy editor plugin cards",
   "main": "./holy-editor-plugin-cards.js",
   "scripts": {

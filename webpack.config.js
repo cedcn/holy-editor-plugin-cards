@@ -7,7 +7,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, './'),
     filename: '[name].js',
-    publicPath: '/static/',
+    publicPath: '/',
     library: 'holyEditorPluginCards',
     libraryExport: 'default',
     libraryTarget: 'umd'
