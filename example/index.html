@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <title>HolyEditor demo - A simple rich text editor ...</title>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.css" rel="stylesheet">
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    blockquote {
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      border-left: 3px solid red;
+    }
+
+    .operation {
+      padding-left: 50px;
+    }
+
+    #editor {
+      padding: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor"></div>
+  <script src="../node_modules/holy-editor/static/holy-editor.js"></script>
+  <script src="../static/holy-editor-plugin-cards.js"></script>
+  <script type="text/javascript">
+    HolyEditor.register('tools', holyEditorPluginCards);
+    var editor = new HolyEditor('#editor', {
+      toolbars: [
+        'html',
+        'convert',
+        '|',
+        'title',
+        '|',
+        'font-size',
+        '|',
+        'bold',
+        'italic',
+        'strike-through',
+        'underline',
+        '|',
+        'fore-color',
+        '|',
+        'back-color',
+        '|',
+        'order-list',
+        'unorder-list',
+        '|',
+        'justify-full',
+        'justify-center',
+        'justify-left',
+        'justify-right',
+        '|',
+        'code',
+        '|',
+        'image',
+        'quote',
+        'emoji',
+        '|',
+        'link',
+        'iframe',
+        'modules',
+        'cards'
+      ],
+      tools: []
+    });
+
+    console.log(editor);
+  </script>
+</body>
+</html>

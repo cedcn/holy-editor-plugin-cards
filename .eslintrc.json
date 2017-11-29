@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "rules": {
+    "no-new": 0,
+    "no-multiple-empty-lines": 0,
+    "import/no-webpack-loader-syntax": 0
+  },
+  "globals": {
+     "deku": true,
+     "dekuApp": true,
+     "$": true
+   }
+}
