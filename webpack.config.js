@@ -2,7 +2,7 @@ const path = require('path')
 
 const config = {
   entry: {
-    'holy-editor-plugin-cards': './index.js'
+    'holy-editor-plugin-cards': './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, './'),

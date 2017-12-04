@@ -1,4 +1,5 @@
 import style from './style.scss'
+import { render } from 'deku/lib/string'
 
 const getRange = () => {
   const selection = window.getSelection()
@@ -20,11 +21,36 @@ export const setSelection = range => {
 }
 
 const defaults = {
-  tooltip: '卡片'
+  tooltip: '卡片',
+  apiUrl: 'https://easy-mock.com/mock/5a251614420a172ca90cb832/cards/cards'
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   const opts = Object.assign({}, defaults, options)
+
+  const getTemplete = data => {
+    return (
+      <ul class={__S_['cards-panel__list']}>
+        {
+          data.map((item, index) => (
+            <li>
+              <a href="javascript:;" class={__S_['cards-panel__insert']} data-id={item.id}>{item.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    )
+  }
+
+  const onChange = val => {
+    $.get(opts.apiUrl)
+      .done(({ data }) => {
+        const jsx = getTemplete(data)
+        const html = render(jsx)
+        const point = document.getElementById('js-cards-panel-list')
+        $(point).html(html)
+      })
+  }
 
   const modal = new widget.Modal($selector, {
     panel: (
@@ -34,27 +60,14 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
             <option>文章</option>
             <option>用户</option>
           </select>
-          <input></input>
+          <input class={__S_['cards-panel__input']} onInput={e => onChange(e.target.value)} placeholder="输入关键字"></input>
         </div>
-        <ul class={__S_['cards-panel__list']}>
-          <li>
-            <a href="javascript:;" class={__S_['cards-panel__insert']} onClick={() => inserCard('https://www.jiqizhixin.com/categories/shen-du')}>报名 | 百度AI开发者实战营重回广东，AI旋风即将席卷「羊城」</a>
-          </li>
-          <li>
-            <a href="javascript:;" class={__S_['cards-panel__insert']} onClick={() => inserCard('https://www.jiqizhixin.com/categories/shen-du')}>文章标题...</a>
-          </li>
-          <li>
-            <a href="javascript:;" class={__S_['cards-panel__insert']} onClick={() => inserCard('https://www.jiqizhixin.com/categories/shen-du')}>报名 | 百度AI开发者实战营重回广东，AI旋风即将席卷「羊城」</a>
-          </li>
-          <li>
-            <a href="javascript:;" class={__S_['cards-panel__insert']} onClick={() => inserCard('https://www.jiqizhixin.com/categories/shen-du')}>文章标题...</a>
-          </li>
-        </ul>
+        <div id="js-cards-panel-list" />
       </div>
     )
   })
 
-  function inserCard (url) {
+  function insertCard (url) {
     modal.close()
     document.execCommand('insertHTML', false, `<iframe src="${url}" width="100%"/>`)
   }
@@ -79,6 +92,11 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
   modal.on('close:before', () => {
     setSelection(vars.cacheRange)
+  })
+
+  $('#js-cards-panel-list').on('click', 'a', function () {
+    const id = $(this).data('id')
+    insertCard(`https://www.jiqizhixin.com/articles/${id}/card`)
   })
 
   util.addSelectionChangeEvent(isInArea => {
