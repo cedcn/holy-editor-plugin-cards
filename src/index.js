@@ -81,11 +81,10 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     )
   })
 
-  let iframeIndex = 0
   function insertCard (url, id) {
+    const random = Math.random().toString(36).substr(2)
     modal.close()
-    iframeIndex++
-    document.execCommand('insertHTML', false, `<iframe data-iframe-id="${id}" data-iframe-category="${category}" name="${category}${iframeIndex}" width="100%" onload="this.height=${category}${iframeIndex}.document.body.scrollHeight" frameborder="0" src="${url}" />`)
+    document.execCommand('insertHTML', false, `<iframe data-iframe-id="${id}" data-iframe-category="${category}" name="${category}${random}" width="100%" onload="this.height=${category}${random}.document.body.scrollHeight" frameborder="0" src="${url}" />`)
   }
 
   const menu = new widget.Menu($selector, {
