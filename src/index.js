@@ -22,10 +22,11 @@ export const setSelection = range => {
 
 const defaults = {
   tooltip: '卡片',
-  apiUrl: 'https://easy-mock.com/mock/5a251614420a172ca90cb832/cards/cards'
+  host: window.location.host
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
+  console.log(options)
   const opts = Object.assign({}, defaults, options)
 
   const getTemplete = data => {
@@ -42,34 +43,49 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     )
   }
 
+  let timer
+  let category = 'articles'
+
   const onChange = val => {
-    $.get(opts.apiUrl)
-      .done(({ data }) => {
-        const jsx = getTemplete(data)
-        const html = render(jsx)
-        const point = document.getElementById('js-cards-panel-list')
-        $(point).html(html)
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      $.ajax({
+        method: 'GET',
+        url: `//${opts.host}/${category}?q=${val}`
       })
+        .done(data => {
+          console.log(data[category])
+          const jsx = getTemplete(data[category])
+          const html = render(jsx)
+          const point = document.getElementById('js-cards-panel-list')
+          $(point).html(html)
+        })
+        .fail(xhr => {
+          alert('请求失败')
+        })
+    }, 300)
   }
 
   const modal = new widget.Modal($selector, {
     panel: (
       <div class={__S_['cards-panel']}>
         <div class={__S_['cards-panel__search']}>
-          <select>
-            <option>文章</option>
-            <option>用户</option>
+          <select id="js-cards-panel-select">
+            <option value="articles" selected={category === 'articles'}>文章</option>
+            <option value="usages" selected={category === 'usages'}>用户</option>
           </select>
-          <input class={__S_['cards-panel__input']} onInput={e => onChange(e.target.value)} placeholder="输入关键字"></input>
+          <input id="js-cards-panel-input" class={__S_['cards-panel__input']} placeholder="输入关键字"></input>
         </div>
         <div id="js-cards-panel-list" />
       </div>
     )
   })
 
-  function insertCard (url) {
+  let iframeIndex = 0
+  function insertCard (url, id) {
     modal.close()
-    document.execCommand('insertHTML', false, `<iframe src="${url}" width="100%"/>`)
+    iframeIndex++
+    document.execCommand('insertHTML', false, `<iframe data-iframe-id="${id}" data-iframe-category="${category}" name="${category}${iframeIndex}" width="100%" onload="this.height=${category}${iframeIndex}.document.body.scrollHeight" frameborder="0" src="${url}" />`)
   }
 
   const menu = new widget.Menu($selector, {
@@ -89,6 +105,9 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     if (range === null) return
     vars.cacheRange = range
   })
+  modal.on('open:after', () => {
+    $('#js-cards-panel-input').trigger('input')
+  })
 
   modal.on('close:before', () => {
     setSelection(vars.cacheRange)
@@ -96,7 +115,16 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
 
   $('#js-cards-panel-list').on('click', 'a', function () {
     const id = $(this).data('id')
-    insertCard(`https://www.jiqizhixin.com/articles/${id}/card`)
+    insertCard(`//${opts.host}/card/${category}/${id}`, id)
+  })
+
+  $('#js-cards-panel-select').on('change', function () {
+    category = this.value
+    $('#js-cards-panel-input').trigger('input')
+  })
+
+  $('#js-cards-panel-input').on('input', function () {
+    onChange(this.value)
   })
 
   util.addSelectionChangeEvent(isInArea => {

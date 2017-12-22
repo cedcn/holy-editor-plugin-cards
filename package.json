@@ -1,6 +1,6 @@
 {
   "name": "holy-editor-plugin-cards",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Holy editor plugin cards",
   "main": "./holy-editor-plugin-cards.js",
   "scripts": {
@@ -45,7 +45,9 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "deku": "^2.0.0-rc16",
-    "holy-editor": "1.0.1-rc1"
+    "deku": "^2.0.0-rc16"
+  },
+  "peerDependencies": {
+    "holy-editor": "1.0.1-rc5"
   }
 }
