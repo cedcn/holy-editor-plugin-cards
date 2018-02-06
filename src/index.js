@@ -51,7 +51,8 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
     timer = setTimeout(() => {
       $.ajax({
         method: 'GET',
-        url: `//${opts.host}/${category}?q=${val}`
+        url: `//${opts.host}/${category}?q=${val}`,
+        dataType: 'json'
       })
         .done(data => {
           console.log(data[category])
@@ -72,7 +73,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
         <div class={__S_['cards-panel__search']}>
           <select id="js-cards-panel-select">
             <option value="articles" selected={category === 'articles'}>文章</option>
-            <option value="usages" selected={category === 'usages'}>用户</option>
+            <option value="usages" selected={category === 'usages'}>应用案例</option>
           </select>
           <input id="js-cards-panel-input" class={__S_['cards-panel__input']} placeholder="输入关键字"></input>
         </div>
