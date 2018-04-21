@@ -26,7 +26,6 @@ const defaults = {
 }
 
 const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
-  console.log(options)
   const opts = Object.assign({}, defaults, options)
 
   const getTemplete = data => {
@@ -85,7 +84,7 @@ const sciprt = options => ({ el, widget, __S_, $selector, util }) => {
   function insertCard (url, id) {
     const random = Math.random().toString(36).substr(2)
     modal.close()
-    document.execCommand('insertHTML', false, `<iframe data-iframe-id="${id}" data-iframe-category="${category}" name="${category}${random}" width="100%" onload="this.height=${category}${random}.document.body.scrollHeight" frameborder="0" src="${url}" />`)
+    document.execCommand('insertHTML', false, `<iframe data-iframe-id="${id}" data-iframe-category="${category}" name="${category}${random}" width="100%" onload="this.height=this.contentWindow.document.body.scrollHeight" frameborder="0" src="${url}" />`)
   }
 
   const menu = new widget.Menu($selector, {
